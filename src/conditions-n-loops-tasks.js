@@ -121,9 +121,62 @@ function isIsoscelesTriangle(/* a, b, c */) {
  *  10  => X
  *  26  => XXVI
  */
-function convertToRomanNumerals(/* num */) {
-  throw new Error('Not implemented');
+
+function convertToRomanNumerals(num) {
+  const currnum = num;
+  if (num < 1) {
+    return '';
+  }
+  if (num === 1) {
+    return 'I';
+  }
+
+  if (num >= 40) {
+    return `XL${convertToRomanNumerals(currnum - 40)}`;
+  }
+  if (num >= 10) {
+    return `X${convertToRomanNumerals(currnum - 10)}`;
+  }
+  if (num >= 9) {
+    return `IX${convertToRomanNumerals(currnum - 9)}`;
+  }
+  if (num >= 5) {
+    return `V${convertToRomanNumerals(currnum - 5)}`;
+  }
+  if (num >= 4) {
+    return `IV${convertToRomanNumerals(currnum - 4)}`;
+  }
+  if (num >= 1) {
+    return `I${convertToRomanNumerals(currnum - 1)}`;
+  }
+  return 0;
 }
+/* function convertToRomanNumerals(num) {
+  const figures = {
+    1: 'I',
+    4: 'IV',
+    5: 'V',
+    9: 'IX',
+    10: 'X',
+    40: 'XL',
+  };
+ 
+  let result = '';
+  let keys = Object.keys(figures);
+  let currnum = num;
+  keys = keys.reverse();
+  for (let i = 0; i < keys.length; i += 1) {
+    const key = keys[i];
+    const value = figures[key];
+    while (currnum >= key) {
+      result += value;
+      currnum -= key;
+    }
+  }
+ 
+  return result;
+}
+*/
 
 /**
  * Converts a number to a string, replacing digits with words.
